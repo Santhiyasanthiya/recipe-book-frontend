@@ -1,0 +1,7 @@
+.login-form-container,
+.signup-form-container {
+    background-color: #222;
+    width: 400px;
+    margin-top: 10%;
+    border-radius: 25px;
+}

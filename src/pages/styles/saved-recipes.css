@@ -1,0 +1,21 @@
+.no-saved-recipies {
+    margin: auto;
+    text-align: center;
+    animation: fadeInOut 2s infinite;
+}
+
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+
+@media (max-width: 1200px) {
+    .card-container {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,89 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 2px #ededed;
+    border-radius: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 200ms ease-in;
+}
+
+.card-container .card:hover {
+    transform: scale(1.02);
+}
+
+.card-container .card:hover .card-button {
+    background-color: #222;
+    color: white;
+}
+
+.card-image{
+    width: 100%;
+    object-fit: cover;
+}
+
+.card-container .card-image {
+    height: 13rem;
+}
+
+.card-title {
+    padding: 1rem;
+}
+
+.card-description {
+    margin-top: 5px;
+    padding: 5px;
+}
+
+.cooking-time {
+    color: green;
+    font-style: italic;
+}
+
+.card-container .card-button {
+    padding: 1rem;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 1rem;
+    border: 2px solid black;
+    background: transparent;
+    border-radius: 1rem;
+    transition: background 200ms ease-in, color 200ms ease-in;
+}
+
+.card-container .card-button-save {
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 4px;
+}
+
+.card-container .card-button-save:hover {
+    transform: scale(1.01);
+}
+
+.card-container .saved-heading {
+    font-style: italic;
+}
+
+
+@media (max-width: 1200px) {
+    .card-container {
+        grid-template-columns: 1fr;
+    }
+}

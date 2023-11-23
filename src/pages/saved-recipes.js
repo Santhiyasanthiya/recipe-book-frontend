@@ -14,7 +14,7 @@ export const SavedRecipes = () => {
     const fetchSavedRecipes = async () => {
       try {
         const response = await axios.get(
-          `${API}/recipes/savedRecipes/${userID}`, {
+          `https://recipe-book-backend-umber.vercel.app/recipes/savedRecipes/${userID}`, {
             headers: {authorization: cookies.access_token}
           }
         );
@@ -29,7 +29,7 @@ export const SavedRecipes = () => {
 
   const unsaveRecipe = async (recipeID) => {
     try {
-      const response = await axios.patch(`${API}/recipes/${userID}/${recipeID}/remove`,
+      const response = await axios.patch(`https://recipe-book-backend-umber.vercel.app/recipes/${userID}/${recipeID}/remove`,
       {},
       {headers: {authorization: cookies.access_token}}
       );

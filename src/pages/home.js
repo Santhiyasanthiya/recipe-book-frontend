@@ -17,7 +17,7 @@ export const Home = () => {
  
     const fetchReipes = async () => {
       try {
-        const response = await axios.get(`${API}/recipes`);
+        const response = await axios.get(`https://recipe-book-backend-umber.vercel.app/recipes`);
         setRecipes(response.data);
       } catch (error) {
         console.error(error);
@@ -28,7 +28,7 @@ export const Home = () => {
     const fetchSavedRecipies = async () => {
       try {
         const response = await axios.get(
-          `${API}/recipes/savedRecipes/ids/${userID}`,
+          `https://recipe-book-backend-umber.vercel.app/recipes/savedRecipes/ids/${userID}`,
           {headers: {authorization: cookies.access_token}}
         );
         setSavedRecipes(response.data.savedRecipes);
@@ -44,7 +44,7 @@ export const Home = () => {
 
   const saveRecipe = async (recipeID) => {
     try {
-      const response = await axios.put(`${API}/recipes`, {
+      const response = await axios.put("https://recipe-book-backend-umber.vercel.app/recipes", {
         userID,
         recipeID,
       }, {
@@ -64,7 +64,7 @@ export const Home = () => {
 
     console.log(recipeID)
     try {
-      const response = await axios.delete(`${API}/recipes/${recipeID}`, {
+      const response = await axios.delete(`https://recipe-book-backend-umber.vercel.app/recipes/${recipeID}`, {
         headers: {authorization : cookies.access_token}
       })
       

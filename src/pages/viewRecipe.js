@@ -16,11 +16,11 @@ export const ViewRecipe = () => {
 
     const fetchData = async () => {
     try {
-      const recipeResponse = await axios.get(`${API}/recipes/${recipeID}`);
+      const recipeResponse = await axios.get(`https://recipe-book-backend-umber.vercel.app/recipes/${recipeID}`);
       const recipeData = recipeResponse.data;
       setRecipe(recipeData);
 
-      const ownerNameresponse = await axios.get(`${API}/auth/${recipeData.recipeOwner}`);
+      const ownerNameresponse = await axios.get(`https://recipe-book-backend-umber.vercel.app/auth/${recipeData.recipeOwner}`);
       setRecipeOwnerDisplayName(ownerNameresponse.data);
     } catch (error) {
       console.error(error);

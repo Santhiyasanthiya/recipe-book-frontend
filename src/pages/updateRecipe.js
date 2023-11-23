@@ -24,7 +24,7 @@ export function EditRecipe(){
         const fetchRecipes = async () => {
      
             const response = await axios.get(
-              `${API}/recipes/${recipeID}`, {
+              `https://recipe-book-backend-umber.vercel.app/recipes/${recipeID}`, {
                
               }
             );
@@ -98,7 +98,7 @@ export default function UpdateRecipe({savedRecipes,setSavedRecipes}) {
         event.preventDefault();
 
     
-          let res = await axios.put(`${API}/recipes/${savedRecipes._id}`, recipe, {
+          let res = await axios.put(`https://recipe-book-backend-umber.vercel.app/recipes/${savedRecipes._id}`, recipe, {
                 headers: { authorization: cookies.access_token }
             })
             alert("Recipe Updated");

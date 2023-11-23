@@ -4,6 +4,7 @@ import { useGetUserID } from "../hooks/useGetUserID";
 import { useCookies } from "react-cookie";
 import "./styles/card.css";
 import { useNavigate } from "react-router-dom";
+import {API} from "../config.js"
 
 export const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -13,21 +14,21 @@ export const Home = () => {
   const userID = useGetUserID();
 
   useEffect(() => {
-    // Fetches all the recipies
+ 
     const fetchReipes = async () => {
       try {
-        const response = await axios.get("https://recipe-book-backend-umber.vercel.app/recipes");
+        const response = await axios.get(`${API}/recipes`);
         setRecipes(response.data);
       } catch (error) {
         console.error(error);
       }
     };
 
-    // Fetches the user saved recipe ID's
+   
     const fetchSavedRecipies = async () => {
       try {
         const response = await axios.get(
-          `https://recipe-book-backend-umber.vercel.app/recipes/savedRecipes/ids/${userID}`,
+          `${API}/recipes/savedRecipes/ids/${userID}`,
           {headers: {authorization: cookies.access_token}}
         );
         setSavedRecipes(response.data.savedRecipes);
@@ -43,7 +44,7 @@ export const Home = () => {
 
   const saveRecipe = async (recipeID) => {
     try {
-      const response = await axios.put("https://recipe-book-backend-umber.vercel.app/recipes", {
+      const response = await axios.put(`${API}/recipes`, {
         userID,
         recipeID,
       }, {
@@ -63,10 +64,13 @@ export const Home = () => {
 
     console.log(recipeID)
     try {
-      const response = await axios.delete(`https://recipe-book-backend-umber.vercel.app/recipes/${recipeID}`, {
+      const response = await axios.delete(`${API}/recipes/${recipeID}`, {
         headers: {authorization : cookies.access_token}
-      }).then((data)=>data.json())
-      .then((mv)=>setRecipes(mv))
+      })
+      
+      console.log(response.data)
+
+      setRecipes(response.data)
        
     } catch (error) {
       console.error(error);
@@ -110,8 +114,7 @@ export const Home = () => {
                   Cooking time : {recipe.cookingTime} Minutes
                 </div>
               </div>
-              {/* <button className="card-button" onClick={ () => viewRecipeButtonClick(recipe._id)}>View Recipe</button> */}
-              <div className="btns">
+             <div className="btns">
               <button type="button" class="btn btn-primary" onClick={()=>navigate(`/update-recipes/${recipe._id}`)}>Edit</button>
                 <button type="button" class="btn btn-danger" onClick={()=>deleteRecipe(`${recipe._id}`)}>Delete</button>
               </div>

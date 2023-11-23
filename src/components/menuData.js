@@ -17,10 +17,13 @@ export const MenuData = [
         cName: "nav-links",
         icon: "fas fa-list"
     },
- 
+    {
+        title: "user"
+       
+    },
     {
         title: "Login/Signup",
-        url: "/auth",
+        url: "/",
         cName: "nav-links-button",
     },
 ];

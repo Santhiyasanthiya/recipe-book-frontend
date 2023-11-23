@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./styles/auth.css";
+import {API} from "../config.js"
 
 export const Signup = () => {
 
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [displayName, setdisplayName] = useState("");
     const navigate = useNavigate();
@@ -15,13 +16,13 @@ export const Signup = () => {
         event.preventDefault();
 
         try {
-            await axios.post("https://recipe-book-backend-umber.vercel.app/auth/register", {
-                username,
+            await axios.post(`${API}/auth/register`, {
+                email,
                 password,
                 displayName
             });
             alert("Registration Completed. Now Login!");
-            navigate("/auth");
+            navigate("/");
         } catch (error) {
             console.error(error)
         }
@@ -29,19 +30,21 @@ export const Signup = () => {
 
     return (
         <div className='container'>
+
+    
             <div className='signup-form-container p-5'>
                 <form onSubmit={onSubmit}>
                     <h3 className='text-center'>Sign Up</h3>
 
                     <div className='mb-2'>
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="Email">Email</label>
                         <input
                          type="text" 
-                         placeholder='Enter username' 
+                         placeholder='Enter Email' 
                          className='form-control' 
-                         id='username' 
-                         value={username}
-                         onChange={(event) => setUsername(event.target.value)}/>
+                         id='email' 
+                         value={email}
+                         onChange={(event) => setEmail(event.target.value)}/>
                     </div>
 
                     <div className='mb-2'>
@@ -71,10 +74,11 @@ export const Signup = () => {
                         className='btn btn-primary w-100'>Sign Up</button>
                     </div>
                     <p className='text-end mt-2'>
-                        Already Registered <Link to="/auth" className='ms-2'>Sign in</Link>
+                        Already Registered <Link to="/" className='ms-2'>Sign in</Link>
                     </p>
                 </form>
             </div>
+           
         </div>
     )
 }

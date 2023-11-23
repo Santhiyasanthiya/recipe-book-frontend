@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "./styles/create-recipe.css";
 import { useCookies } from 'react-cookie';
+import {API} from "../config.js"
 
 export const CreateRecipe = () => {
     const userID = useGetUserID();
@@ -42,7 +43,7 @@ export const CreateRecipe = () => {
         event.preventDefault();
 
         try {
-            await axios.post("https://recipe-book-backend-umber.vercel.app/recipes", recipe, {
+            await axios.post(`${API}/recipes`, recipe, {
                 headers: { authorization: cookies.access_token }
             })
             alert("Recipe Created");

@@ -18,8 +18,8 @@ html, body {
   
   background: linear-gradient(
       90deg,
-      rgba(222, 66, 66, 1) 0%,
-      rgba(212, 32, 32, 1) 94%
+      rgba(7, 7, 7, 0) 0%,
+      rgb(7,7,7,0) 94%
   );
 }
 

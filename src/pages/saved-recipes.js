@@ -3,6 +3,7 @@ import "./styles/saved-recipes.css";
 import { useGetUserID } from "../hooks/useGetUserID";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import {API} from "../config.js"
 
 export const SavedRecipes = () => {
   const [savedRecipes, setSavedRecipes] = useState([]);
@@ -13,7 +14,7 @@ export const SavedRecipes = () => {
     const fetchSavedRecipes = async () => {
       try {
         const response = await axios.get(
-          `https://recipe-book-backend-umber.vercel.app/recipes/savedRecipes/${userID}`, {
+          `${API}/recipes/savedRecipes/${userID}`, {
             headers: {authorization: cookies.access_token}
           }
         );
@@ -28,7 +29,7 @@ export const SavedRecipes = () => {
 
   const unsaveRecipe = async (recipeID) => {
     try {
-      const response = await axios.patch(`https://recipe-book-backend-umber.vercel.app/recipes/${userID}/${recipeID}/remove`,
+      const response = await axios.patch(`${API}/recipes/${userID}/${recipeID}/remove`,
       {},
       {headers: {authorization: cookies.access_token}}
       );

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-
+import {API} from "../config.js"
 export const Auth = () => {
 
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     
     const [_, setCookies] = useCookies(['access_token'])
@@ -18,14 +18,17 @@ export const Auth = () => {
         event.preventDefault();
 
         try {
-            const response = await axios.post("https://recipe-book-backend-umber.vercel.app/", {
-                username,
+            const response = await axios.post(`${API}/auth/login`, {
+                email,
                 password
             });
 
             if (response.status === 200) {
+               console.log(response.data)
             setCookies("access_token", response.data.token);
             window.localStorage.setItem("userID", response.data.userID);
+            window.localStorage.setItem("name", response.data.Uname);
+            window.localStorage.setItem("token", response.data.token);
             navigate("/home");
             }
            
@@ -46,13 +49,13 @@ export const Auth = () => {
                 <h3 className='text-center'>Sign In</h3>
 
                 <div className='mb-2'>
-                    <label htmlFor="username">Username</label>
+                    <label htmlFor="Email">Email</label>
                     <input 
                     type="text" 
-                    placeholder='Enter username' 
+                    placeholder='Enter Email-Id' 
                     className='form-control'
-                    id='username'
-                    onChange={(event) => setUsername(event.target.value)}/>
+                    id='email'
+                    onChange={(event) => setEmail(event.target.value)}/>
                 </div>
 
                 <div className='mb-2'>
@@ -74,10 +77,12 @@ export const Auth = () => {
                 <button className='btn btn-primary w-100'>Sign in</button>
                 </div>
                 <p className='text-end mt-2'>
-                    Forgot <a href="#">Password?</a> <Link to="/signup" className='ms-2'>Sign up</Link>
+               
+                    <Link to="/signup" className='ms-2'>Sign up</Link>
                 </p>
             </form>
         </div>
+       
     </div>
   )
 }

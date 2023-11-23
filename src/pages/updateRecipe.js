@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "./styles/create-recipe.css";
 import { useCookies } from 'react-cookie';
+import {API} from "../config.js"
 
 
 export function EditRecipe(){
@@ -21,9 +22,9 @@ export function EditRecipe(){
 
     useEffect(() => {
         const fetchRecipes = async () => {
-        //   try {
+     
             const response = await axios.get(
-              `https://recipe-book-backend-umber.vercel.app/recipes/${recipeID}`, {
+              `${API}/recipes/${recipeID}`, {
                
               }
             );
@@ -32,9 +33,7 @@ export function EditRecipe(){
 
             setSavedRecipes(response.data);
            
-        //   } catch (error) {
-        //     console.error(error);
-        //   }
+      
         };
     
         fetchRecipes();
@@ -59,7 +58,6 @@ export default function UpdateRecipe({savedRecipes,setSavedRecipes}) {
 
     const [cookies, _] = useCookies(["access_token"]);
 
-    // const [savedRecipes,setSavedRecipes] = useState()
 
     const [recipe, setRecipe] = useState({
         name: savedRecipes.name,
@@ -71,21 +69,18 @@ export default function UpdateRecipe({savedRecipes,setSavedRecipes}) {
         userOwner: userID
     });
 
-    // console.log(recipe) 
+   
 
     const handleChange = (event) => {
 
         const {name, value} = event.target;
         setRecipe({ ...recipe, [name]: value });
 
-        // const {name,value} = event.target;
-        // console.log("name",name)
-        // console.log("value",value)
-        // setRecipe({[name]: value});
+        
          console.log(recipe)
     }
 
-    // function to add ingredient
+  
     const addIngredient = () => {
         setRecipe({ ...recipe, ingredients: [...recipe.ingredients, ""] });
     }
@@ -102,8 +97,8 @@ export default function UpdateRecipe({savedRecipes,setSavedRecipes}) {
         console.log("event",event)
         event.preventDefault();
 
-        // try {
-          let res = await axios.put(`https://recipe-book-backend-umber.vercel.app/recipes/${savedRecipes._id}`, recipe, {
+    
+          let res = await axios.put(`${API}/recipes/${savedRecipes._id}`, recipe, {
                 headers: { authorization: cookies.access_token }
             })
             alert("Recipe Updated");
@@ -111,9 +106,6 @@ export default function UpdateRecipe({savedRecipes,setSavedRecipes}) {
             console.log(res)
             navigate("/home")
 
-        // } catch (error) {
-        //     console.log(error);
-        // }
     }
 
   return (
@@ -203,7 +195,7 @@ export default function UpdateRecipe({savedRecipes,setSavedRecipes}) {
             </div>
         </div>
         <div className="button">
-            <button type='submit'>Create Recipe</button>
+            <button type='submit'>Update Recipe</button>
         </div>
     </form>
     <div className='spacer'>Space to the footer </div>

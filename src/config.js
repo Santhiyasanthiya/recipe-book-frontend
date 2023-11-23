@@ -1,1 +1,1 @@
-export  const API = "https://recipe-book-backend-umber.vercel.app/"
+export  const API = "https://recipe-book-backend-umber.vercel.app"
